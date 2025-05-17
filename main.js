@@ -1,5 +1,7 @@
 // Modules
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, webContents } = require("electron");
+
+// Manage state across sessions
 const windowStateKeeper = require("electron-window-state");
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -70,6 +72,18 @@ function createWindow() {
 
   // Open DevTools - Remove for PRODUCTION!
   // mainWindow.webContents.openDevTools();
+
+  let wc = mainWindow.webContents;
+
+  console.log(webContents.getAllWebContents());
+
+  wc.on("did-finish-load", () => {
+    console.log("Content fully loaded");
+  });
+
+  wc.on("dom-ready", () => {
+    console.log("DOM ready");
+  });
 
   // Wait to render the page until it's ready
   mainWindow.once("ready-to-show", () => {
