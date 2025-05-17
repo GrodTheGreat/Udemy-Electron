@@ -32,11 +32,31 @@ function createWindow() {
 }
 
 // Electron `app` is ready
-app.on("ready", createWindow);
+app.on("ready", () => {
+  console.log(app.getPath("desktop"));
+  console.log(app.getPath("music"));
+  console.log(app.getPath("temp"));
+  console.log(app.getPath("userData"));
+
+  createWindow();
+});
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+app.on("before-quit", () => {
+  console.log("before-quit");
+});
+
+// app.on("browser-window-blur", () => {
+//   console.log("browser-window-blur");
+//   setTimeout(app.quit, 3000);
+// });
+
+app.on("browser-window-focus", () => {
+  console.log("browser-window-focus");
 });
 
 // When app icon is clicked and app is running, (macOS) recreate the BrowserWindow
