@@ -21,6 +21,8 @@ function createWindow() {
     // show: false,
     // Useful to give better illusion of rapid load
     // backgroundColor: "#2B2E3B",
+    // remove the os window bar, be careful with this, you will need to have alternatives for functionality now
+    frame: false,
   });
 
   secondaryWindow = new BrowserWindow({
