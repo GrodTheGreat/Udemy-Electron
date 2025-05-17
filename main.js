@@ -17,13 +17,24 @@ function createWindow() {
       contextIsolation: false,
       nodeIntegration: true,
     },
+    // Don't show window (immediately, we show later on)
+    // show: false,
+    // Useful to give better illusion of rapid load
+    backgroundColor: "#2B2E3B",
   });
 
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile("index.html");
+  // Remember, electron uses a Chromium browser, so we can load web pages
+  // mainWindow.loadURL("https://google.com");
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  // Wait to render the page until it's ready
+  mainWindow.once("ready-to-show", () => {
+    mainWindow.show();
+  });
 
   // Listen for window being closed
   mainWindow.on("closed", () => {
@@ -46,18 +57,18 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-app.on("before-quit", () => {
-  console.log("before-quit");
-});
+// app.on("before-quit", () => {
+//   console.log("before-quit");
+// });
 
 // app.on("browser-window-blur", () => {
 //   console.log("browser-window-blur");
 //   setTimeout(app.quit, 3000);
 // });
 
-app.on("browser-window-focus", () => {
-  console.log("browser-window-focus");
-});
+// app.on("browser-window-focus", () => {
+//   console.log("browser-window-focus");
+// });
 
 // When app icon is clicked and app is running, (macOS) recreate the BrowserWindow
 app.on("activate", () => {
