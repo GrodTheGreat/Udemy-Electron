@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "watch": "nodemon --exec electron .",
+    "watch": "nodemon --inspect=9229 --exec electron .",
     "reset": "git reset --hard"
   },
   "repository": "https://github.com/GrodTheGreat/Udemy-Electron",
@@ -18,7 +18,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^36.2.1",
-    "nodemon": "^3.1.10"
-  },
-  "dependencies": {}
+    "nodemon": "^3.1.10",
+    "prettier": "3.5.3"
+  }
 }
